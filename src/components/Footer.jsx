@@ -24,10 +24,10 @@ export default function Footer() {
           <div>
             <h3 className="font-semibold mb-3">Company</h3>
             <ul className="space-y-2 text-gray-500">
-              <li><a href="#">About us</a></li>
-              <li><a href="#">Supplyhive corporate</a></li>
-              <li><a href="#">Careers</a></li>
-              <li><a href="#">Team</a></li>
+              <li> About us  </li>
+              <li> Supplyhive corporate  </li>
+              <li> Careers  </li>
+              <li> Team  </li>
             </ul>
           </div>
 
@@ -35,9 +35,9 @@ export default function Footer() {
           <div>
             <h3 className="font-semibold mb-3">Contact us</h3>
             <ul className="space-y-2 text-gray-500">
-              <li><a href="#">Help & Support</a></li>
-              <li><a href="#">Partner with us</a></li>
-              <li><a href="#">Ride with us</a></li>
+              <li> Help & Support  </li>
+              <li> Partner with us  </li>
+              <li> Ride with us  </li>
             </ul>
           </div>
 
@@ -56,9 +56,9 @@ export default function Footer() {
           <div>
             <h3 className="font-semibold mb-3">Legal</h3>
             <ul className="space-y-2 text-gray-500">
-              <li><a href="#">Terms & Conditions</a></li>
-              <li><a href="#">Cookie policy</a></li>
-              <li><a href="#">Privacy Policy</a></li>
+              <li> Terms & Conditions  </li>
+              <li> Cookie policy  </li>
+              <li> Privacy Policy  </li>
             </ul>
           </div>
 
@@ -66,18 +66,18 @@ export default function Footer() {
           <div>
             <h3 className="font-semibold mb-3">Information</h3>
             <ul className="space-y-2 text-gray-500">
-              <li><a href="#">Location</a></li>
-              <li><a href="#">Email</a></li>
-              <li><a href="#">Social Media</a></li>
+              <li> Location  </li>
+              <li> Email  </li>
+              <li> Social Media  </li>
             </ul>
           </div>
         </div>
 
         {/* Social Icons */}
         <div className="flex space-x-5">
-          <a href="#"><FaInstagram size={22} className="text-pink-500" /></a>
-          <a href="#"><FaFacebook size={22} className="text-blue-600" /></a>
-          <a href="#"><FaWhatsapp size={22} className="text-green-500" /></a>
+           <FaInstagram size={22} className="text-pink-500" />  
+           <FaFacebook size={22} className="text-blue-600" />  
+           <FaWhatsapp size={22} className="text-green-500" />  
         </div>
       </div>
     </footer>
