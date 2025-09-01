@@ -3,7 +3,7 @@ import { useCart } from "./Cartcontext";
 import { useNavigate } from "react-router-dom";
 
 export default function Cart() {
-  const { cartItems, removeFromCart, updateQuantity } = useCart();
+  const { cartItems, removeFromCart, updateQuantity, clearCart } = useCart();
   const navigate = useNavigate();
 
   // 📌 Calculate totals
@@ -114,11 +114,10 @@ export default function Cart() {
             <span className="font-bold text-lg">Rs.{subtotal}</span>
           </p>
           <button
-            onClick={() =>
-              navigate("/payment", {
-                state: { cartItems, subtotal }, // ✅ Pass items & total
-              })
-            }
+            onClick={() => {
+              navigate("/payment", { state: { cartItems, subtotal } });
+              clearCart(); // ✅ Empty cart after checkout
+            }}
             className="bg-blue-600 text-white px-6 py-2 rounded-lg shadow hover:bg-blue-700 transition"
           >
             Proceed to Checkout

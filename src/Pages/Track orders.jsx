@@ -1,64 +1,72 @@
-import React from "react";
-import { CheckCircle, Circle } from "lucide-react";
+import { useLocation } from "react-router-dom";
 
-export default function OrderTracking() {
+export default function TrackOrder() {
+  const location = useLocation();
+  const { cartItems = [], subtotal = 0 } = location.state || {};
+
+  // 📅 Current order date
+  const today = new Date();
+  const orderDate = today.toLocaleDateString("en-IN", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  });
+
+  // 🚚 Delivery date after 3 days
+  const deliveryDate = new Date(today);
+  deliveryDate.setDate(today.getDate() + 3);
+  const formattedDeliveryDate = deliveryDate.toLocaleDateString("en-IN", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  });
+
   return (
-    <div className="max-w-3xl mx-auto p-6 space-y-8">
-      {/* Banner */}
-      <div className="w-full rounded-xl overflow-hidden shadow-md">
-        <img
-          src="https://via.placeholder.com/1200x400?text=Stationery+Order+Banner"
-          alt="Order Banner"
-          className="w-full h-48 object-cover"
-        />
-      </div>
+    <div className="max-w-4xl mx-auto p-6 space-y-6">
+      <h2 className="text-2xl font-bold">Track Your Order</h2>
+      <p className="text-gray-600">
+        Order ID: <span className="font-semibold">OD123456789</span>
+      </p>
 
-      {/* Order Info */}
-      <div>
-        <h2 className="font-semibold">Order ID : OD123456789</h2>
-        <p className="text-sm text-gray-600">
-          Seller : Supplyhive <br />
-          Rs. 249
+      {/* ✅ Order Status Timeline */}
+      <div className="space-y-3 border-l-4 border-green-500 pl-4">
+        <p className="text-green-600">✔️ Order Confirmed, {orderDate}</p>
+        <p className="text-green-600">✔️ Shipped</p>
+        <p className="text-gray-600">⏳ Out for Delivery</p>
+        <p className="text-gray-600">
+          🚚 Delivery by {formattedDeliveryDate}, between 10 AM – 7 PM
         </p>
       </div>
 
-      {/* Order Tracking */}
-      <div className="space-y-4">
-        {/* Step 1 */}
-        <div className="flex items-center gap-3">
-          <CheckCircle className="text-green-600 w-5 h-5" />
-          <p>Order Confirmed, Apr 27</p>
-        </div>
-        {/* Step 2 */}
-        <div className="flex items-center gap-3">
-          <CheckCircle className="text-green-600 w-5 h-5" />
-          <p>Shipped</p>
-        </div>
-        {/* Step 3 */}
-        <div className="flex items-center gap-3">
-          <Circle className="text-gray-500 w-5 h-5" />
-          <p>Out for Delivery</p>
-        </div>
-        {/* Step 4 */}
-        <div className="flex items-center gap-3">
-          <Circle className="text-gray-500 w-5 h-5" />
-          <p>Delivery, May 1 by 11 PM</p>
-        </div>
-      </div>
+      {/* 🛒 Order Summary */}
+      <div className="border rounded-xl p-6 shadow-md">
+        <h3 className="text-lg font-bold mb-4">Your Order</h3>
+        {cartItems.map((item) => (
+          <div
+            key={item.id}
+            className="flex justify-between items-center border-b pb-2 mb-2"
+          >
+            <div className="flex items-center gap-4">
+              {item.image && (
+                <img
+                  src={item.image}
+                  alt={item.name}
+                  className="w-16 h-16 object-cover rounded"
+                />
+              )}
+              <p>
+                {item.name} x {item.quantity}
+              </p>
+            </div>
+            <p className="font-semibold">
+              Rs.{item.price * item.quantity}
+            </p>
+          </div>
+        ))}
 
-      {/* Order Summary */}
-      <div className="border rounded-xl shadow-md">
-        <div className="p-4 border-b font-semibold flex justify-between">
-          <span>Products</span>
-          <span>Subtotal</span>
-        </div>
-        <div className="p-4 flex justify-between">
-          <span className="font-medium">Scientific Calculator x 10</span>
-          <span>Rs.249</span>
-        </div>
-        <div className="bg-blue-600 text-white font-semibold px-4 py-3 flex justify-between rounded-b-xl">
-          <span>Total</span>
-          <span>Rs.249</span>
+        <div className="flex justify-between border-t pt-2 mt-2">
+          <p className="font-bold">Total</p>
+          <p className="font-bold text-blue-600">Rs.{subtotal}</p>
         </div>
       </div>
     </div>

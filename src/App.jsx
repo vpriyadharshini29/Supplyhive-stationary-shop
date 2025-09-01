@@ -12,6 +12,7 @@ import OrderTracking from "./Pages/Track orders";
 import OrderDetails from "./Pages/My orders";
 import Cart from "./Pages/My cart page";
 import Checkout from "./Pages/Payment page";
+import MyOrders from "./Pages/My orders";
 
 
 export default function App() {
@@ -28,7 +29,7 @@ export default function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/login" element={<Signin />} />
             <Route path="/track" element={<OrderTracking />} />
-            <Route path="/order" element={<OrderDetails />} />
+            <Route path="/order" element={<MyOrders />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/payment" element={<Checkout />} />
           </Routes>

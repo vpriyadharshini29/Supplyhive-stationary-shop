@@ -12,13 +12,15 @@ export default function Checkout() {
   const { cartItems = [], subtotal = 0 } = location.state || {};
 
   const handlePlaceOrder = () => {
-    setShowPopup(true);
+  setShowPopup(true);
 
-    // ⏳ Delay then go home
-    setTimeout(() => {
-      navigate("/");
-    }, 2500);
-  };
+  // ⏳ Delay then go to My Orders page and pass order data
+  setTimeout(() => {
+    navigate("/order", {
+      state: { cartItems, subtotal, paymentMethod },
+    });
+  }, 2500);
+};
 
   return (
     <div className="max-w-5xl mx-auto p-6 space-y-8 relative">
@@ -148,7 +150,7 @@ export default function Checkout() {
                 Order Placed Successfully!
               </h3>
               <p className="text-gray-600 mb-4">
-                Thank you for shopping with us. Redirecting to home...
+                Thank you for shopping with us. 
               </p>
               <motion.div
                 className="w-10 h-10 border-4 border-blue-600 border-t-transparent rounded-full mx-auto animate-spin"

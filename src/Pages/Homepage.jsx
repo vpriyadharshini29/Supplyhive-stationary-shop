@@ -1,6 +1,17 @@
-import React from "react";
-
+import {useState} from "react";
+import { useCart } from "./Cartcontext";
+import { motion, AnimatePresence } from "framer-motion";
 export default function Home() {
+  const { addToCart } = useCart();
+  const [popup, setPopup] = useState(null);
+
+  // 📌 Handle Add to Cart
+  const handleAddToCart = (product) => {
+    addToCart(product); // ✅ adds product to cart
+    setPopup(product);
+    setTimeout(() => setPopup(null), 2500);
+  };
+
 
     const products = [
     {
@@ -199,11 +210,23 @@ export default function Home() {
 
 
 
+<div className="px-6 md:px-16 py-12">
+      {/* ✅ Add-to-Cart Popup */}
+      <AnimatePresence>
+        {popup && (
+          <motion.div
+            initial={{ opacity: 0, y: -50 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -50 }}
+            transition={{ duration: 0.4 }}
+            className="fixed top-6 right-6 bg-green-600 text-white px-6 py-3 rounded-lg shadow-lg z-50"
+          >
+            ✅ {popup.name} added to cart!
+          </motion.div>
+        )}
+      </AnimatePresence>
 
-    <div className="px-6 md:px-16 py-12">
-      <h2 className="text-center text-2xl font-bold mb-10">
-        Featured Product
-      </h2>
+      <h2 className="text-center text-2xl font-bold mb-10">Featured Product</h2>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {products.map((product) => (
@@ -230,10 +253,15 @@ export default function Home() {
               </div>
 
               <p className="text-center font-semibold">{product.price}</p>
-              <p className="text-center text-sm font-bold mt-1">{product.offer}</p>
+              <p className="text-center text-sm font-bold mt-1">
+                {product.offer}
+              </p>
 
               {/* Button */}
-              <button className="mt-4 bg-white text-black px-4 py-2 rounded-lg font-medium hover:bg-gray-200">
+              <button
+                onClick={() => handleAddToCart(product)}
+                className="mt-4 bg-white text-black px-4 py-2 rounded-lg font-medium hover:bg-gray-200"
+              >
                 Add to Cart
               </button>
             </div>
@@ -299,32 +327,7 @@ export default function Home() {
 
     <div className="px-6 md:px-16 py-12">
       {/* Back to School Section */}
-      <h2 className="text-center text-2xl font-bold mb-8">Back to School</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-        {products1.map((product) => (
-          <div
-            key={product.id}
-            className="bg-blue-100 rounded-xl shadow-md p-4 text-center"
-          >
-            <img
-              src={product.img}
-              alt={product.name}
-              className="w-full h-40 object-cover rounded-lg mb-3"
-            />
-            <h3 className="font-bold">{product.name}</h3>
-            <div className="text-yellow-500 text-sm">★★★★★</div>
-            <p className="mt-2 text-gray-700">
-              Rs. {product.price} <br />
-              <span className="font-semibold">
-                Buy 3 or more @ Rs. {(product.price * 2.02).toFixed(2)}
-              </span>
-            </p>
-            <button className="mt-3 bg-white text-black font-semibold px-4 py-2 rounded-lg border hover:bg-gray-100">
-              Add to Cart
-            </button>
-          </div>
-        ))}
-      </div>
+    
 
       {/* Team Section */}
       <div className="mt-16 text-center">
